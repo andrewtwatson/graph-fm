@@ -1,0 +1,31 @@
+name: "Deploy to GitHub Pages"
+
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download dependencies
+        run: npm ci
+    
+      - name: Build project
+        run: npm run build
+    #   - run: npm test
+      
+      - name: Deploy to Github Pages
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          gh-pages -d build --branch gh-pages
+    
