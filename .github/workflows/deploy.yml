@@ -25,6 +25,7 @@ jobs:
       
       - name: Deploy to Github Pages
         run: |
+          npm install -g gh-pages
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           gh-pages -d build --branch gh-pages
